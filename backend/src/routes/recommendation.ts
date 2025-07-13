@@ -25,7 +25,7 @@ const validateRecommendationRequest = [
 
 // POST /api/recommendation - Generate recommendation
 router.post(
-  "/recommendation",
+  "/",
   authMiddleware, // Require authentication
   validateRecommendationRequest,
   async (req: Request, res: Response, next: NextFunction) => {
@@ -63,7 +63,7 @@ router.post(
 );
 
 // GET /api/recommendation - Health check
-router.get("/recommendation", (req: Request, res: Response) => {
+router.get("/", (req: Request, res: Response) => {
   res.json({
     status: "healthy",
     timestamp: new Date().toISOString(),
@@ -71,18 +71,5 @@ router.get("/recommendation", (req: Request, res: Response) => {
     version: "1.0.0",
   });
 });
-
-// GET /api/analytics - Get recommendation analytics (future feature)
-router.get(
-  "/analytics",
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const analytics = await recommendationController.getAnalytics();
-      res.json(analytics);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
 
 export { router as recommendationRoutes };

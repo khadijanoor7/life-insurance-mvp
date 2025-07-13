@@ -14,6 +14,7 @@ import { authRoutes } from "./routes/auth";
 import { protectedRoutes } from "./routes/protected";
 import { userRoutes } from "./routes/user";
 import { authMiddleware } from "./middleware/authMiddleware";
+import { analyticsRoutes } from "./routes/analytics";
 
 // Load environment variables
 dotenv.config();
@@ -66,6 +67,7 @@ app.use("/api/recommendation", authMiddleware, recommendationRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/protected", protectedRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 // 404 handler
 app.use("*", (req, res) => {
