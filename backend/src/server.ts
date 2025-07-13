@@ -13,6 +13,7 @@ import { healthRoutes } from "./routes/health";
 import { authRoutes } from "./routes/auth";
 import { protectedRoutes } from "./routes/protected";
 import { userRoutes } from "./routes/user";
+import { authMiddleware } from "./middleware/authMiddleware";
 
 // Load environment variables
 dotenv.config();
@@ -61,7 +62,7 @@ app.use(requestLogger);
 
 // Routes
 app.use("/health", healthRoutes);
-app.use("/api", recommendationRoutes);
+app.use("/api/recommendation", authMiddleware, recommendationRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/protected", protectedRoutes);
 app.use("/api/user", userRoutes);
